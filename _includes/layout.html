@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{{ title }} | Burmark Electrical</title>
+
+  <link rel="stylesheet" href="/css/styles.css?v1.1" media="screen"/>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/css/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/css/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/css/images/favicon-16x16.png">
+  <link rel="manifest" href="/css/images/site.webmanifest">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="page-wrapper" id="{{ id }}">
+    <div class="container">
+      <div class="half left">
+        <div class="logo">
+          <a href="{{ navigation.home }}">
+            <img src="/images/bumark-logo-v1.png" alt="Burmark Electrical Logo">
+          </a>
+        </div>
+        <nav class="menu">
+          <ul>
+            <li><a href="{{ navigation.autogration }}" class="{% if page.url == navigation.autogration %}active{% endif %}">auto:gration</a></li>
+            <li><a href="{{ navigation.lighting }}" class="{% if page.url == navigation.lighting %}active{% endif %}">lighting</a></li>
+            <li><a href="{{ navigation.networks }}" class="{% if page.url == navigation.networks %}active{% endif %}">networks</a></li>
+            <li><a href="{{ navigation.contact }}" class="{% if page.url == navigation.contact %}active{% endif %}">contact</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="half right">
+        <div class="content">
+          {{ content }}
+        </div>
+        {% if page.url != '/' %}
+          {% include "footer.html" %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</body>
+</html>
