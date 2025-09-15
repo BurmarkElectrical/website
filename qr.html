@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="refresh" content="0; url={{ data.url }}">
+ 
+  <script>
+    window.location.href = "{{ data.url }}"
+  </script>
+   
+  <title>QR Code Redirection</title>
+</head>
+<body>
+  <!-- Currently just redirecting to home page if coming here from a QR code scan -->
+  If you are not redirected automatically, follow <a href='{{ data.url }}'>Burmark Electrical</a>
+</body>
+</html>

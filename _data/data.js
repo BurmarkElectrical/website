@@ -1,4 +1,7 @@
 module.exports = {
+	// Main URL
+	'url': 'https://burmarkelectrical.nz',
+
 	// Cache Busting
 	'cache-time': Math.floor(new Date().getTime()/1000),
 
