@@ -16,3 +16,4 @@ module.exports = {
 		'link': 'mailto:hello@burmarkelectrical.nz'
 	}
 }
+

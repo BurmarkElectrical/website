@@ -23,7 +23,6 @@ time, mark, audio, video, #wrapper {
     vertical-align: baseline;
     text-decoration: none;
     outline: none;
-    list-style: none;
 }
 
 /* HTML5 display-role reset for older browsers */
@@ -37,6 +36,7 @@ body {
 
 ol, ul {
     list-style: none;
+    list-style-position: inside;
 }
 
 blockquote, q {
@@ -53,6 +53,17 @@ table {
     border-spacing: 0;
 }
 
+input, textarea, button {
+  border: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  outline: none;
+  font-family: inherit;
+  background-color: inherit;
+}
+
 /*
 ==========================================
   
@@ -63,12 +74,14 @@ table {
   Colours:
 
   Dark: #222
-  Light: #e3dcd4 / #e3dcd4
+  Light: #e3dcd4 / #e3dcd4 / Page Background 
   Accent: #c0a496ff / #c0a496
 
 ==========================================
 */
-* {
+*,
+*:before,
+*:after  {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -113,24 +126,49 @@ h3 {
   font-weight: 400;
 }
 
-a {
+h4 {
+  color: #e3dcd4;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  background-color: #222;
+  padding: 0.35rem 1rem;
+  margin-bottom: 1rem;
+  margin-top: 3rem;
+}
+
+a, button {
   color: #222;
   transition: 0.3s;
   text-decoration-line: underline;
   text-decoration-color: #c0a496;
 }
 
-a:hover {
+a:hover, button:hover {
   color: #c0a496;
+  cursor: pointer;
 }
 
-b {
+b, strong {
   font-weight: bold;
+  font-size: 0.9rem;
 }
 
 li::marker {
   color: #c0a496;
   font-size: 1.4em;
+}
+
+ol {
+  list-style: arabic-indic;
+}
+
+.clear {
+  overflow: hidden;
+}
+
+.no-border {
+  border: none !important;
 }
 
 .page-wrapper {
@@ -162,6 +200,7 @@ li::marker {
   height: 100vh;
   padding: 2rem;
   border-right: 2px solid #c0a496;
+  max-width: 40%;
 }
 
 .left a img {
@@ -218,8 +257,20 @@ li::marker {
   padding-bottom: 3rem;
 }
 
-.content section p {
-  padding-left: 1em;
+/*.content section p {
+  padding-left: 1rem;
+}
+*/
+.padded {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.content section ol {
+  display: block;
+  list-style-position: inside;
+  padding-left: 1rem;
+  list-style-type: upper-roman;
 }
 
 .menu {
@@ -337,6 +388,10 @@ li::marker {
   text-decoration-line: underline;
 }
 
+.disclaimer {
+  font-size: 0.7rem;
+  color: #c0a496;
+}
 
 
 /*====================================
@@ -347,7 +402,6 @@ li::marker {
   color: #222;
   max-width: 600px;
   margin: 0 auto;
-  padding-left: 1em;
   padding-top: 3.5em;
   border-top: 2px solid #c0a496;
   position: relative;
@@ -366,10 +420,10 @@ li::marker {
 
 }
 
-.footer section {
+/*.footer section {
   padding-left: 2em;
 }
-
+*/
 #get-in-touch {
   font-style: italic;
   color: #c0a496;
@@ -400,6 +454,258 @@ li::marker {
   max-width: 100px;
 }
 
+/*====================================
+   Forms
+======================================*/
+
+.form {
+  overflow: auto; /*clear floats*/
+  margin-bottom: 2rem;
+  padding-right: 4px; /*space for box-shadow*/
+}
+
+.form-input {
+  position: relative;
+  display: inline-block;
+  font-family: inherit;
+  min-width: 200px;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.form-input label {
+  display: block;
+  position: absolute;
+  top: 0.3rem;
+  left: 1rem;
+  font-size: 0.70rem;
+  opacity: 0;
+  transition: all 200ms ease;
+}
+
+.form-input input, .form-input textarea, .form .submit {
+  font-family: inherit;
+  padding: 10px 15px;
+  padding-top: 1.4rem;
+  padding-bottom: 1rem;
+  border: 2px solid #c0a496;
+  font-size: 1rem;
+  transition: all 200ms ease;
+  background-color: transparent;
+  width: 100%;
+  box-shadow: 4px 4px 0px 0px #c0a496;
+  -webkit-box-shadow: 4px 4px 0px 0px #c0a496;
+  -moz-box-shadow: 4px 4px 0px 0px #c0a496;
+}
+
+.form-input input:focus, .form-input textarea:focus, .form .submit:hover {
+  color: #222;
+  border: 2px solid #222;
+  transition: all 200ms ease; 
+  background-color: #f0ece9;
+  box-shadow: 4px 4px 0px 0px #222;
+  -webkit-box-shadow: 4px 4px 0px 0px #222;
+  -moz-box-shadow: 4px 4px 0px 0px #222;
+}
+
+.form-input input::placeholder, .form-input textarea::placeholder {
+  color: #222;
+  opacity: 0.4;
+  transition: all 200ms ease;
+}
+
+.form-input:has(input:focus, input:not(:placeholder-shown)) label {
+  opacity: 1;
+}
+.form-input:has(input:focus, input:not(:placeholder-shown)) input::placeholder {
+  opacity: 0;
+}
+
+.form-input:has(textarea:focus, textarea:not(:placeholder-shown)) label {
+  opacity: 1;
+}
+.form-input:has(textarea:focus, textarea:not(:placeholder-shown)) textarea::placeholder {
+  opacity: 0;
+}
+
+.action-button {
+  font-family: inherit;
+  padding: 1rem 1.5rem;
+
+  transition: all 200ms ease;
+  background-color: transparent;
+  width: 100%;
+
+  font-weight: bold;
+  margin-bottom: 1rem;
+  width: 50%;
+  font-size: 1.25rem;
+  text-decoration: none;
+  color: #222;
+  border: 2px solid #222;
+
+  transition: all 200ms ease; 
+  background-color: #f0ece9;
+  box-shadow: 4px 4px 0px 0px #222;
+  -webkit-box-shadow: 4px 4px 0px 0px #222;
+  -moz-box-shadow: 4px 4px 0px 0px #222;
+  opacity: 0.6;
+
+}
+
+.action-button:hover {
+  cursor: pointer;
+  opacity: 1;
+  transition: all 200ms ease; 
+  color: #222;
+}
+
+.form .submit {
+  font-weight: bold;
+  margin-bottom: 1rem;
+  width: 50%;
+  font-size: 1.25rem;
+  text-decoration: none;
+  color: #222;
+  border: 2px solid #222;
+  transition: all 200ms ease; 
+  background-color: #f0ece9;
+  box-shadow: 4px 4px 0px 0px #222;
+  -webkit-box-shadow: 4px 4px 0px 0px #222;
+  -moz-box-shadow: 4px 4px 0px 0px #222;
+  opacity: 0.6;
+}
+
+.form .submit:hover {
+  cursor: pointer;
+  opacity: 1;
+  transition: all 200ms ease; 
+}
+
+.form-help {
+  font-size: 0.7rem;
+  text-align: right;
+  display: block;
+  padding-top: 0.25rem;
+}
+
+.form-section {
+  padding: 1rem;
+  position: relative;
+  border-left: 4px solid #c0a496;
+  overflow: hidden;
+}
+
+
+.grid-container {
+  display: grid;
+  /* Creates two columns, each taking 1 fraction of free space */
+  grid-template-columns: 1fr 1fr; 
+  gap: 15px; /* Space between items */
+}
+
+.item {
+  display: block;
+}
+
+.grid-container .form-input input {
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .grid-container {
+    /* single column */
+    grid-template-columns: 1fr;
+  }
+}
+
+/*====================================
+   Radio Buttons
+======================================*/
+
+:root {
+  --form-control-color: #222;
+}
+
+.form-radios {
+  padding-left: 1rem;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.form-radios label {
+  font-weight: bold;
+  line-height: 1.1;
+  display: grid;
+  grid-template-columns: 1em auto;
+  gap: 1rem;
+}
+
+.form-radios label:hover, .form-radios input:hover {
+  cursor: pointer;
+}
+
+.form-radios label + span {
+  font-weight: normal;
+  padding-left: 3rem;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+}
+
+input[type=radio] {
+  /* Add if not using autoprefixer */
+  -webkit-appearance: none;
+  /* Remove most all native input styles */
+  -moz-appearance: none;
+       appearance: none;
+  /* For iOS < 15 */
+  background-color: var(--form-background);
+  /* Not removed via appearance */
+  margin: 0;
+  font: inherit;
+  color: #c0a496;
+  width: 1.5em;
+  height: 1.5em;
+  border: 0.25em solid #c0a496;
+  border-radius: 0%;
+  transform: translateY(-0.075em);
+  display: grid;
+  place-content: center;
+  box-shadow: 2px 2px 0px 0px #c0a496;
+  -webkit-box-shadow: 2px 2px 0px 0px #c0a496;
+  -moz-box-shadow: 2px 2px 0px 0px #c0a496;
+}
+
+input[type=radio]::before {
+  content: "";
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 0%;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--form-control-color);
+  /* Windows High Contrast Mode */
+  background-color: CanvasText;
+}
+
+input[type=radio]:checked::before {
+  transform: scale(1);
+}
+
+
+.indent {
+  padding-left: 3rem;
+}
+
+.indented-list {
+
+}
+
+.indented-list li div {
+  padding-left: 1rem;
+  display: inline-block;
+  
+}
 
 /*====================================
    Page CSS
@@ -423,7 +729,7 @@ li::marker {
 ======================================*/
 
 /* Mobile Styles */
-@media (max-width: 768px) {
+@media (max-width: 1120px) {
   .container {
     flex-direction: column;
     height: auto;
@@ -434,6 +740,7 @@ li::marker {
     height: auto;
     flex: 1;
     border-right: none;  /* clear border */
+    max-width: 100%;
   }
 
   .right {

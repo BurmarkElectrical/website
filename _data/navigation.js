@@ -3,5 +3,12 @@ module.exports = {
 	'autogration': '/autogration/',
 	'lighting': '/lighting/',
 	'networks': '/networks/',
- 	'contact': '/'
+ 	'contact': '/',
+ 	'thanks': '/thanks/',
+ 	
+ 	'solar': {
+ 		'index': '/solar/',
+ 		'questionnaire': '/solar/questionnaire/',
+ 		'questionnaire_thanks': '/solar/questionnaire/thanks'
+ 	},
 }

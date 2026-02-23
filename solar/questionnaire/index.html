@@ -1,0 +1,309 @@
+---
+layout: layout.html
+id: solar-questionnaire
+title: Solar Questionnaire
+include_footer_contact_form: false
+---
+<h1>solar questionnaire</h1>
+<section>
+	<form action="{{ form.action }}{{ form.action_hash }}" class="form" method="POST">
+
+		{% include "form_hidden_inputs.html" %}
+        <input type="hidden" name="_subject" value="Solar enquiry from {{ data.url }}">
+        <input type="hidden" name="_next" value="{{ data.url }}{{ navigation.solar.questionnaire_thanks }}">
+
+		<div class="padded">
+			<p>
+				<strong>So, you’re considering solar?</strong> 
+				<br/>
+				Complete this easy five-step questionnaire to help us understand your energy profile and priorities, then we can start tailoring a solution that aligns with your goals.
+				<br>
+				<br>
+				To begin, please share your contact details and the site address for the solar installation. 
+				<br>
+				<br>
+	        	<span class="disclaimer">Your information is used solely for this assessment and is never stored, shared, or sold.</span>
+			</p>
+	        <div class="form-section">
+	        	<span class="form-input">
+	            <label for="name">name</label>
+	            <input name="name" placeholder="name" type="text">
+	        </span>
+
+	        <span class="form-input">
+	            <label for="email">email</label>
+	            <input name="email" placeholder="email" type="email" required>
+	        </span>
+
+	        <span class="form-input">
+	            <label for="address">site address</label>
+	            <input name="address" placeholder="site address" type="text" required>
+	            <span class="form-help">Your address is needed for remote site assessment</span>
+	        </span>
+
+	        <span class="form-input">
+	            <label for="retailer">energy retailer</label>
+	            <input name="retailer" placeholder="energy retailer" type="text">
+	            <span class="form-help">e.g Mercury, Genesis, Contact, Meridian</span>
+	        </span>
+
+	        </div>
+	    </div>
+	        
+	    <h4>energy consumption</h4>
+	    <div class="padded">
+	    	<p>
+	        	To accurately size your solar system, it is essential we understand your energy usage.
+	        	<br>
+	        	<br>
+				If you have a smart meter, you can typically access your monthly energy consumption via your provider’s app or online portal. 
+				<br>
+				<br>
+				If this information is not available, we can provide an estimate based on your household’s appliances or <a id="autofillBtn">use  2025 montly averages for Taranaki.</a>
+				<br>
+				<br>
+	        </p>
+	        <div class="form-section">
+	        	<b>1. If available, include your monthly power usage in kilowatt-hour (kWh):</b>
+	        	<br>
+	        	<br>
+		        <div class="grid-container">
+		        	<div class="item">
+		        		<span class="form-input">
+				            <label for="kwh-january">january</label>
+				            <input name="kwh-january" placeholder="january" type="number" min=0 step=".5" data-autofill="{{solar.historical_consumption[0]}}">
+				        </span>
+		        	</div>
+		        	<div class="item">
+		        		<span class="form-input">
+				            <label for="kwh-february">february</label>
+				            <input name="kwh-february" placeholder="february" type="number" min=0 step=".5" data-autofill="{{solar.historical_consumption[1]}}">
+				        </span>
+		        	</div>
+		        	<div class="item">
+		        		<span class="form-input">
+				            <label for="kwh-march">march</label>
+				            <input name="kwh-march" placeholder="march" type="number" min=0 step=".5" data-autofill="{{solar.historical_consumption[2]}}">
+				        </span>
+		        	</div>
+		        	<div class="item">
+		        		<span class="form-input">
+				            <label for="kwh-april">april</label>
+				            <input name="kwh-april" placeholder="april" type="number" min=0 step=".5" data-autofill="{{solar.historical_consumption[3]}}">
+				        </span>
+		        	</div>
+		        	<div class="item">
+		        		<span class="form-input">
+				            <label for="kwh-may">may</label>
+				            <input name="kwh-may" placeholder="may" type="number" min=0 step=".5" data-autofill="{{solar.historical_consumption[4]}}">
+				        </span>
+		        	</div>
+		        	<div class="item">
+		        		<span class="form-input">
+				            <label for="kwh-june">june</label>
+				            <input name="kwh-june" placeholder="june" type="number" min=0 step=".5" data-autofill="{{solar.historical_consumption[5]}}">
+				        </span>
+		        	</div>
+		        	<div class="item">
+		        		<span class="form-input">
+				            <label for="kwh-july">july</label>
+				            <input name="kwh-july" placeholder="july" type="number" min=0 step=".5" data-autofill="{{solar.historical_consumption[6]}}">
+				        </span>
+		        	</div>
+		        	<div class="item">
+		        		<span class="form-input">
+				            <label for="kwh-august">august</label>
+				            <input name="kwh-august" placeholder="august" type="number" min=0 step=".5" data-autofill="{{solar.historical_consumption[7]}}">
+				        </span>
+		        	</div>
+		        	<div class="item">
+		        		<span class="form-input">
+				            <label for="kwh-september">september</label>
+				            <input name="kwh-september" placeholder="september" type="number" min=0 step=".5" data-autofill="{{solar.historical_consumption[8]}}">
+				        </span>
+		        	</div>
+		        	<div class="item">
+		        		<span class="form-input">
+				            <label for="kwh-october">october</label>
+				            <input name="kwh-october" placeholder="october" type="number" min=0 step=".5" data-autofill="{{solar.historical_consumption[9]}}">
+				        </span>
+		        	</div>
+		        	<div class="item">
+		        		<span class="form-input">
+				            <label for="kwh-november">november</label>
+				            <input name="kwh-november" placeholder="november" type="number" min=0 step=".5" data-autofill="{{solar.historical_consumption[10]}}">
+				        </span>
+		        	</div>
+		        	<div class="item">
+		        		<span class="form-input">
+				            <label for="kwh-december">december</label>
+				            <input name="kwh-december" placeholder="december" type="number" min=0 step=".5" data-autofill="{{solar.historical_consumption[11]}}">
+				        </span>
+		        	</div>
+				</div>
+
+				<script type="text/javascript">
+			    	document.addEventListener('DOMContentLoaded', () => {
+					    document.getElementById('autofillBtn').addEventListener('click', () => {
+					    	event.preventDefault(); // Stops the default form submission
+						    document.querySelectorAll('[data-autofill]').forEach(input => {
+						        input.value = input.dataset.autofill;
+						    });
+						});
+					});
+			    </script>
+
+	        </div>
+	    </div>
+
+	    <h4>array mounting</h4>
+	    <div class="padded">
+	        <div class="form-section">
+	        	<b>2. Where will the solar panels be mounted?</b>
+	        	<br>
+	        	<br>
+	        	<div class="form-radios">
+	        		
+					<label for="array-mounting-roof">
+						<input type="radio" name="array-mounting" id="array-mounting-roof" value="roof" checked>
+						Roof
+					</label>
+					<br>
+					<label for="array-mounting-ground">
+						<input type="radio" name="array-mounting" id="array-mounting-ground" value="ground">
+						Ground
+					</label>
+					<br>
+					<label for="array-mounting-unknown">
+						<input type="radio" name="array-mounting" id="array-mounting-unknown" value="unknown">
+						I don’t know
+					</label>
+	        	</div>
+	        </div>
+	    </div>
+
+	    <h4>inverter mode</h4>
+	    <div class="padded">
+	    	<div class="form-section">
+	        	<b>3. Which inverter mode is most applicable?</b>
+	        	<br>
+	        	<br>
+	        	<div class="form-radios">
+
+					<label for="inverter-mode-grid-tied">
+						<input type="radio" name="inverter-mode" id="inverter-mode-grid-tied" value="grid-tied" checked>
+						Grid-tied
+					</label>
+					<span>
+						Your solar system will stay connected to the national grid, meaning you can use grid power when needed and send excess solar back for credit.
+					</span>
+
+					<label for="inverter-mode-off-grid">
+						<input type="radio" name="inverter-mode" id="inverter-mode-off-grid" value="off-grid">
+						Off-grid
+					</label>
+					<span>
+						Your installation will operate independently, where your home relies solely on solar panels and batteries for power.
+					</span>
+
+					<label for="inverter-mode-unknown">
+						<input type="radio" name="inverter-mode" id="inverter-mode-unknown" value="unknown">
+						I don’t know
+					</label>
+	        	</div>
+	        </div>
+	    </div>
+
+	    <h4>black-out prevention</h4>
+	    <div class="padded">
+	    	<p>
+	        	Standard grid-tied solar inverters automatically shut down during a grid outage — meaning your home will lose power even if the sun is shining. 
+	        	<br>
+	        	<br>
+				At Burmark, we recommend installing solar systems with blackout protection. These systems automatically isolate from the grid during an outage and continue supplying power to your installation, ensuring greater resilience and energy security.
+	        </p>
+
+	        <div class="form-section">
+	        	<b>4. Would you like black-out prevention?</b>
+	        	<br>
+	        	<br>
+	        	<div class="form-radios">
+
+					<label for="blackout-prevention-full-backup">
+						<input type="radio" name="blackout-prevention" id="blackout-prevention-full-backup" value="full-backup">
+						Full Backup
+					</label>
+					<span>
+						All appliances and circuits will work during a grid blackout.
+					</span>
+
+					<label for="blackout-prevention-partial-backup">
+						<input type="radio" name="blackout-prevention" id="blackout-prevention-partial-backup" value="partial-backup" checked>
+						Partial Backup
+					</label>
+					<span>
+						Selected circuits & appliances will function during a grid blackout.
+					</span>
+
+					<label for="blackout-prevention-no">
+						<input type="radio" name="blackout-prevention" id="blackout-prevention-no" value="no">
+						No
+					</label>
+					<span>
+						You will be without power if during a grid blackout.
+					</span>
+	        	</div>
+	        </div>
+	    </div>
+
+	    <h4>energy storage systems</h4>
+	    <div class="padded">
+	    	<p>
+	        	Batteries store excess energy produced during the day so you can use it at night or when the sun isn’t shining. 
+	        	<br>
+	        	<br>
+	        	Energy storage helps reduce reliance on the grid during expensive peak hours and provide backup power during blackouts, making your home more energy independent.
+	        </p>
+
+	        <div class="form-section">
+	        	<b>5. Would you like batteries?</b>
+	        	<br>
+	        	<br>
+	        	<div class="form-radios">
+
+					<label for="ess-definitely">
+						<input type="radio" name="ess" id="ess-definitely" value="definitely">
+						Definitely
+					</label>
+					<br>
+					<label for="ess-maybe">
+						<input type="radio" name="ess" id="ess-maybe" value="maybe" checked>
+						Maybe; depends on cost
+					</label>
+					<br>
+					<label for="ess-no">
+						<input type="radio" name="ess" id="ess-no" value="no">
+						No
+					</label>
+	        	</div>
+	        </div>
+	    </div>
+	        
+
+	    <h4>that was easy!</h4>
+	    <div class="padded">
+	    	<p>
+	        	Feel free to include any questions or comments in the box below, then click <b>Send</b> and we will take it from here.
+	        </p>
+
+	        <div class="form-section no-border">
+	        	<span class="form-input">
+		            <label for="message">message</label>
+		            <textarea placeholder="message" name="message" rows="{{form.rows}}"></textarea>
+		        </span>
+
+		        <button class="submit" type="submit" class="">{{form.submit_text}}</button>
+	        </div>
+	    </div>
+	</form>
+</section>

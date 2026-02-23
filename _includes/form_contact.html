@@ -1,0 +1,22 @@
+<form action="{{ form.action }}{{ form.action_hash }}" class="form" method="POST">
+
+    {% include "form_hidden_inputs.html" %}
+    
+    <span class='form-input'>
+        <label for="name">name</label>
+        <input name='name' placeholder='name' type='text'>
+    </span>
+
+    <span class='form-input'>
+        <label for="email">email</label>
+        <input name='email' placeholder='email' type='email' required>
+    </span>
+
+    <span class='form-input'>
+        <label for="message">message</label>
+        <textarea placeholder="message" name="message" rows="{{form.rows}}" required></textarea>
+    </span>
+
+    <button class="submit" type="submit">{{form.submit_text}}</button>
+
+</form>
