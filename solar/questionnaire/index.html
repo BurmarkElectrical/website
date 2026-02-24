@@ -31,13 +31,13 @@ include_footer_contact_form: false
 	        </span>
 
 	        <span class="form-input">
-	            <label for="email">email</label>
-	            <input name="email" placeholder="email" type="email" required>
+	            <label for="email">email*</label>
+	            <input name="email" placeholder="email*" type="email" required>
 	        </span>
 
 	        <span class="form-input">
-	            <label for="address">site address</label>
-	            <input name="address" placeholder="site address" type="text" required>
+	            <label for="address">site address*</label>
+	            <input name="address" placeholder="site address*" type="text" required>
 	            <span class="form-help">Your address is needed for remote site assessment</span>
 	        </span>
 
@@ -138,18 +138,43 @@ include_footer_contact_form: false
 		        		<span class="form-input">
 				            <label for="kwh-december">december</label>
 				            <input name="kwh-december" placeholder="december" type="number" min=0 step=".5" data-autofill="{{solar.historical_consumption[11]}}">
+				            <span class="form-help">Total: <span id="total">0</span> kWh</span>
 				        </span>
 		        	</div>
 				</div>
 
 				<script type="text/javascript">
 			    	document.addEventListener('DOMContentLoaded', () => {
-					    document.getElementById('autofillBtn').addEventListener('click', () => {
+
+					    const inputs = document.querySelectorAll('[data-autofill]');
+						const totalDisplay = document.getElementById('total');
+
+						function updateTotal() {
+						    let total = 0;
+
+						    inputs.forEach(input => {
+						        total += parseFloat(input.value) || 0;
+						    });
+
+						    totalDisplay.textContent = total.toFixed(2);
+						}
+
+						// Listen for changes
+						inputs.forEach(input => {
+						    input.addEventListener('input', updateTotal);
+						});
+
+						//Auto Fill
+						document.getElementById('autofillBtn').addEventListener('click', () => {
 					    	event.preventDefault(); // Stops the default form submission
-						    document.querySelectorAll('[data-autofill]').forEach(input => {
+					    	inputs.forEach(input => {
 						        input.value = input.dataset.autofill;
 						    });
+						    updateTotal();
 						});
+
+						// Optional: run once on page load
+						updateTotal();
 					});
 			    </script>
 
@@ -195,7 +220,7 @@ include_footer_contact_form: false
 						Grid-tied
 					</label>
 					<span>
-						Your solar system will stay connected to the national grid, meaning you can use grid power when needed and send excess solar back for credit.
+						Your solar system will stay connected to the national grid, meaning you can use grid power when needed and send excess solar power back for credit.
 					</span>
 
 					<label for="inverter-mode-off-grid">
@@ -278,7 +303,7 @@ include_footer_contact_form: false
 					<br>
 					<label for="ess-maybe">
 						<input type="radio" name="ess" id="ess-maybe" value="maybe" checked>
-						Maybe; depends on cost
+						Maybe - depends on the cost
 					</label>
 					<br>
 					<label for="ess-no">
