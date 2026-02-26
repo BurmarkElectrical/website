@@ -1,0 +1,139 @@
+<h4>frequently asked questions</h4>
+<div class="padded">
+    
+<!--     <span class="form-input">
+        <label for="faq-filter">search</label>
+        <input type="text" name="faq-filter" id="faq-search" placeholder="search">
+    </span> -->
+
+    <div class="accordion">
+        <div class="accordion-item">
+            <button aria-expanded="false">
+                <span class="accordion-title">Will my solar panels work during a power outage?</span>
+                <span class="icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion-content">
+                <p>
+                    If your system includes <strong>blackout protection / changeover capability</strong>, then you will continue to have power during a grid outage.
+                    <br><br>
+                    Standard grid-connected solar systems automatically <strong>shut down when the grid goes down.</strong> This safety feature (anti-islanding protection) prevents electricity from feeding back into the network while repairs are being carried out.
+                    <br><br>
+                    Without changeover functionality your solar will switch off during a blackout.
+                </p>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <button aria-expanded="false">
+                <span class="accordion-title">Should I install a battery?</span>
+                <span class="icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion-content">
+                <p>
+                    <strong>It depends on your goals, budget and power usage.</strong>
+                    <br><br>
+                    As battery technology becomes more affordable and intelligent, we can prioritise <strong>self-consumption</strong> — meaning you use as much of your own solar energy as possible instead of exporting it to the grid. With smart charge and discharge scheduling, we can control when the battery supplies your home and when it’s better to import from the grid (for example, avoiding peak pricing).
+                    <br><br>
+                    If your home already uses most of its energy during daylight hours, solar-only systems often provide the fastest financial return, just remember <strong>solar is a long term investment</strong> and a battery can save you more in the long term.
+                    <br><br>
+                    As standard, we evaluate both <strong>solar-only</strong> and <strong>solar with battery</strong> configurations, so we can recommend the option that best suits your circumstances and budget.
+                </p>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <button aria-expanded="false">
+                <span class="accordion-title">Can I use the grid as my battery?</span>
+                <span class="icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion-content">
+                <p>
+                    Excess solar energy you produce can be exported to the grid and bought back later, but it's usually a case of selling low and buying high.
+                </p>
+                <strong class="accent">Example</strong>
+                <small>Contact Energy 2025</small>
+                <div class="indent">
+                    <p>
+                        <strong>Export:</strong> credit for 1kWh = <strong>8¢</strong>
+                        <br>
+                        <strong>Import:</strong> price for 1kWh = <strong>26¢</strong>
+                        <br>
+                        <span class="accent">------------------</span>
+                        <br>
+                        <strong class="indent">Net cost:</strong> for 1kWh = <strong>18¢ loss</strong>
+                        <br>
+                    </p>
+                </div>
+                <p>
+                    Therefore, for every kWh you export, you will have to pay 18¢ to use that kWh of energy later. If you install a battery, you get to save this difference.
+                </p>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <button aria-expanded="false">
+                <span class="accordion-title">Do solar panels need cleaning?</span>
+                <span class="icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion-content">
+                <p>
+                    <strong>Usually not.</strong> In most cases, rain does a good job of keeping panels clean. 
+                    <br>
+                    <br>
+                    However, in areas with heavy dust, pollen, salt air or other environmental factors, an occasional rinse may help maintain performance.
+                </p>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <button aria-expanded="false">
+                <span class="accordion-title">Does solar work in cloudy weather?</span>
+                <span class="icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion-content">
+                <p>
+                    <strong>Yes.</strong> Solar panels still generate electricity on cloudy days — just at a reduced output.
+                    <br><br>
+                    While production varies depending on cloud thickness and weather conditions, systems typically produce around <strong>10–30% of their normal output</strong> in overcast conditions.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="application/javascript">
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // Search Filter
+/*        const faq_index = document.querySelectorAll('.accordion-item')
+
+        document.querySelector('#faq-search').addEventListener('input', (e) => {
+          const term = e.target.value.toLowerCase();
+          faq_index.forEach(item => {
+            console.log(item.textContent)
+            item.style.display = item.textContent.toLowerCase().includes(term) ? '' : 'none';
+          });
+        });*/
+
+        // Accordion
+        const questions = document.querySelectorAll('.accordion button');
+
+        function toggleAccordion() {
+            const itemToggle = this.getAttribute('aria-expanded');
+
+            for (i = 0; i < questions.length; i++) {
+                questions[i].setAttribute('aria-expanded', 'false');
+            }
+
+            if (itemToggle == 'false') {
+                this.setAttribute('aria-expanded', 'true');
+            }
+        }
+
+        questions.forEach((item) => item.addEventListener('click', toggleAccordion));
+    });
+    
+
+    
+</script>

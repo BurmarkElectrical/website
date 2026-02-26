@@ -35,7 +35,7 @@ body {
 }
 
 ol, ul {
-    list-style: none;
+/*    list-style: none;*/
     list-style-position: inside;
 }
 
@@ -137,6 +137,15 @@ h4 {
   margin-top: 3rem;
 }
 
+.accent {
+  color: #c0a496;
+}
+
+small {
+  font-size: 0.7rem;
+  color: #c0a496;
+}
+
 a, button {
   color: #222;
   transition: 0.3s;
@@ -154,6 +163,11 @@ b, strong {
   font-size: 0.9rem;
 }
 
+ol, ul {
+    list-style-position: inside;
+    margin-bottom: 1rem;
+}
+
 li::marker {
   color: #c0a496;
   font-size: 1.4em;
@@ -161,6 +175,10 @@ li::marker {
 
 ol {
   list-style: arabic-indic;
+}
+
+.no-list-style {
+  list-style: none;
 }
 
 .clear {
@@ -386,11 +404,6 @@ ol {
 
 .glossary { 
   text-decoration-line: underline;
-}
-
-.disclaimer {
-  font-size: 0.7rem;
-  color: #c0a496;
 }
 
 
@@ -646,7 +659,7 @@ ol {
 }
 
 .form-radios label + span {
-  font-weight: normal;
+  font-weight: 100;
   padding-left: 3rem;
   display: inline-block;
   margin-bottom: 1.5rem;
@@ -758,4 +771,117 @@ input[type=radio]:checked::before {
   .left a img {
     max-width: 45%;
   }
-} 
+}
+
+
+
+
+
+
+/*====================================
+   Accordion
+======================================*/
+
+.accordion .accordion-item {
+  border-bottom: 1px solid #c0a496;
+}
+
+.accordion .accordion-item button[aria-expanded='true'] {
+  border-bottom: 1px solid #c0a496;
+}
+
+.accordion button {
+  position: relative;
+  display: block;
+  text-align: left;
+  width: 100%;
+  padding: 1em 0;
+  color: #c0a496;
+  font-size: 1.15rem;
+  font-weight: 400;
+  border: none;
+  background: none;
+  outline: none;
+  text-decoration: none;
+}
+
+.accordion button:hover,
+.accordion button:focus {
+  cursor: pointer;
+  color: #222;
+}
+
+.accordion button:hover::after,
+.accordion button:focus::after {
+  cursor: pointer;
+  color: #222;
+  border: 1px solid #c0a496;
+}
+
+.accordion button .accordion-title {
+  padding: 1em 1.5em 1em 0;
+}
+
+.accordion button .icon {
+  display: inline-block;
+  position: absolute;
+  top: 18px;
+  right: 0;
+  width: 22px;
+  height: 22px;
+  border: 1px solid;
+  border-radius: 22px;
+  border-color: #c0a496;
+}
+
+.accordion button .icon::before {
+  display: block;
+  position: absolute;
+  content: '';
+  top: 9px;
+  left: 5px;
+  width: 10px;
+  height: 1px;
+  background: #c0a496;
+  transition: all 200ms ease; 
+}
+.accordion button .icon::after {
+  display: block;
+  position: absolute;
+  content: '';
+  top: 5px;
+  left: 9px;
+  width: 1px;
+  height: 10px;
+  background: #c0a496;
+  transition: all 300ms ease; 
+}
+
+.accordion button[aria-expanded='true'] {
+  color: #222;
+}
+.accordion button[aria-expanded='true'] .icon::after {
+  width: 0;
+  transition: all 200ms ease; 
+}
+.accordion button[aria-expanded='true'] + .accordion-content {
+  opacity: 1;
+  max-height: 100em;
+  transition: all 200ms linear;
+  will-change: opacity, max-height;
+  overflow: scroll;
+  padding-top: 2rem;
+}
+.accordion .accordion-content {
+  padding: 0 0.5rem;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 200ms linear, max-height 200ms linear;
+  will-change: opacity, max-height;
+}
+.accordion .accordion-content p {
+  font-size: 1rem;
+  font-weight: 300;
+  margin-bottom: 2em;
+}

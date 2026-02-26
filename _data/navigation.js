@@ -1,10 +1,11 @@
 module.exports = {
 	'home': '/',
+	'contact': '/',
 	'autogration': '/autogration/',
 	'lighting': '/lighting/',
 	'networks': '/networks/',
- 	'contact': '/',
  	'thanks': '/thanks/',
+ 	'privacy-policy': '/privacy-policy/',
  	
  	'solar': {
  		'index': '/solar/',
