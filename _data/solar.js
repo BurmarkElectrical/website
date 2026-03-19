@@ -15,5 +15,14 @@ module.exports = {
 		'october': 504, 
 		'november': 409, 
 		'december': 416
+	},
+
+	'faq': {
+		'grid-battery': {
+			'title': '',
+			'source': '',
+			'import': '26',
+			'export': '8'
+		}
 	}
 }

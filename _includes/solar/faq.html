@@ -50,22 +50,24 @@
                 <p>
                     Excess solar energy you produce can be exported to the grid and bought back later, but it's usually a case of selling low and buying high.
                 </p>
-                <strong class="accent">Example</strong>
-                <small>Contact Energy 2025</small>
+                <strong class="accent">Basic Example - Contact Energy 2026</strong>
                 <div class="indent">
                     <p>
-                        <strong>Export:</strong> credit for 1kWh = <strong>8¢</strong>
+                        <strong>Export:</strong> credit for 1kWh = <strong>{{solar.faq.grid-battery.export}}¢</strong>
                         <br>
-                        <strong>Import:</strong> price for 1kWh = <strong>26¢</strong>
+                        <strong>Import:</strong> price for 1kWh = <strong>{{solar.faq.grid-battery.import}}¢</strong>
                         <br>
                         <span class="accent">------------------</span>
                         <br>
-                        <strong class="indent">Net cost:</strong> for 1kWh = <strong>18¢ loss</strong>
+                        <strong class="indent">Net cost:</strong> for 1kWh = 
+                            <strong>
+                                {{solar.faq.grid-battery.import | minus: solar.faq.grid-battery.export}}¢ loss
+                            </strong>
                         <br>
                     </p>
                 </div>
                 <p>
-                    Therefore, for every kWh you export, you will have to pay 18¢ to use that kWh of energy later. If you install a battery, you get to save this difference.
+                    Therefore, for every kWh you export, you will have to pay {{solar.faq.grid-battery.import | minus: solar.faq.grid-battery.export}}¢ to use that kWh of energy later. If you install a battery, you get to save this difference.
                 </p>
             </div>
         </div>
