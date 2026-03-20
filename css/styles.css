@@ -137,10 +137,6 @@ h4 {
   margin-top: 3rem;
 }
 
-.accent {
-  color: #c0a496;
-}
-
 small {
   font-size: 0.7rem;
   color: #c0a496;
@@ -174,7 +170,27 @@ li::marker {
 }
 
 ol {
-  list-style: arabic-indic;
+  list-style: decimal;
+}
+
+ol ol {
+  list-style: decimal;
+}
+
+ol ol li {
+  padding-left: 1.5rem;
+}
+
+.clause {
+  color: #222;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  padding: 0.35rem 1rem;
+}
+
+.accent {
+  color: #c0a496;
 }
 
 .no-list-style {
@@ -288,7 +304,6 @@ ol {
   display: block;
   list-style-position: inside;
   padding-left: 1rem;
-  list-style-type: upper-roman;
 }
 
 .menu {
@@ -354,6 +369,10 @@ ol {
   color: #c0a496;
   padding-top: 1rem;
   font-size: 0.8rem;
+}
+
+#copyright a {
+  color: #c0a496;
 }
 
 .service-list {
