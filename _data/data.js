@@ -4,6 +4,7 @@ module.exports = {
 
 	// Cache Busting
 	'cache-time': Math.floor(new Date().getTime()/1000),
+	'year': new Date().getFullYear(),
 
 	// Data
 	'phone': {
