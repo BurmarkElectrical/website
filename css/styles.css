@@ -49,8 +49,13 @@ blockquote:before, blockquote:after, q:before, q:after {
 }
 
 table {
-    border-collapse: collapse;
-    border-spacing: 0;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 1rem; /* 0 for horizontal spacing, 1em for vertical spacing */
+}
+
+th {
+  text-align: left;
 }
 
 input, textarea, button {
@@ -179,6 +184,10 @@ ol ol {
 
 ol ol li {
   padding-left: 1.5rem;
+}
+
+.text-right {
+  text-align: right;
 }
 
 .clause {
@@ -793,7 +802,14 @@ input[type=radio]:checked::before {
 }
 
 
+/*====================================
+   Terms of Trade Page
+======================================*/
 
+#standard-rates td, #standard-rates th {
+  border-bottom: 1px dashed #c0a496; /* Apply border to individual cells */
+  padding-bottom: 0.25rem;
+}
 
 
 
