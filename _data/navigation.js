@@ -1,6 +1,6 @@
 module.exports = {
 	'home': '/',
-	'contact': '/',
+	'contact': '/contact/',
 	'autogration': '/autogration/',
 	'lighting': '/lighting/',
 	'networks': '/networks/',

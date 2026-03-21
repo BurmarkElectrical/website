@@ -1,0 +1,25 @@
+---
+layout: layout.html
+id: contact
+title: Contact
+include_footer_contact_form: false
+---
+
+<h1>contact</h1>
+<div class="padded">
+
+	<h3 id="get-in-touch">ready to elevate your space? send us a message</h3>
+        
+    <section>
+        <ul class="service-list">
+            <li>
+                <a href="{{ data.email.link }}">{{ data.email.addr }}</a>
+            </li>
+            <li>
+                <a href="{{ data.phone.link }}">{{ data.phone.number }}</a>
+            </li>
+        </ul>
+    </section>
+
+    <section>{% include "form/contact.html" %}</section>
+</div>
