@@ -50,13 +50,30 @@ blockquote:before, blockquote:after, q:before, q:after {
 
 table {
     width: 100%;
-    border-collapse: separate;
-    border-spacing: 0 1rem; /* 0 for horizontal spacing, 1em for vertical spacing */
+    border-collapse: collapse;
 }
 
 th {
   text-align: left;
 }
+
+td, th {
+  padding-top: 1rem;
+  padding-right: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+td:first-child {
+  padding-left: 0;
+}
+
+td:last-child {
+  padding-top: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+}
+
+
 
 input, textarea, button {
   border: 0;
@@ -806,11 +823,13 @@ input[type=radio]:checked::before {
    Terms of Trade Page
 ======================================*/
 
-#standard-rates td, #standard-rates th {
+#standard-rates tr {
   border-bottom: 1px dashed #c0a496; /* Apply border to individual cells */
-  padding-bottom: 0.25rem;
 }
 
+/*#standard-rates td, #standard-rates th {
+  padding: 1rem 1rem;
+}*/
 
 
 /*====================================
