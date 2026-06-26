@@ -8,6 +8,10 @@ module.exports = {
 	'energy': 'energy',
 	'knx': 'knx',
 
+	/* solar*/
+	'solar-process': 'solar-process',
+	'solar-frequently-asked-questions': 'solar-frequently-asked-questions',
+
 	/* Lighting */
 	'lighting-design': 'lighting-design',
 	'human-centric-lighting': 'human-centric-lighting',

@@ -22,304 +22,324 @@ include_footer_contact_form: false
 				<strong>So, you’re considering solar?</strong> 
 				<br/>
 				<br/>
-				Complete this easy six-step questionnaire to help us understand your energy profile and priorities. From there, we can begin tailoring a solution that aligns with your goals.
+				Complete this easy eight-step questionnaire to help us understand your energy profile and priorities. From there, we can begin tailoring a solution that aligns with your goals.
 				<br/>
 				<br/>
 				All you’ll need is a recent electricity bill or access to your energy usage through your retailer’s online platform.
 			</p>
 	    </div>
 
-	    <h4>site details</h4>
-	    <div class="padded">
-	    	<p>
-				To begin, please share your contact details and the site address for the proposed solar installation.
-			</p>
-	        <div class="form-section">
-	        	<span class="form-input">
-		            <label for="name">name</label>
-		            <input name="name" placeholder="name" type="text">
-		        </span>
+	    <ul class="process-list" id="processList">
+            <div class="process-line"></div>
+            <div class="process-line-fill" id="lineFill"></div>
 
-		        <span class="form-input">
-		            <label for="email">email*</label>
-		            <input name="email" placeholder="email*" type="email" required>
-		        </span>
+            <li class="step">
+                <div class="step-marker">01</div>
+                <div class="step-content">
+                    <p class="step-title">Site Details</p>
+                    <p>
+						To begin, please share your contact details and the site address for the proposed solar installation.
+					</p>
+			        <div class="form-section">
+			        	<span class="form-input">
+				            <label for="name">name</label>
+				            <input name="name" placeholder="name" type="text">
+				        </span>
 
-		        <span class="form-input">
-		            <label for="address">site address*</label>
-		            <input name="address" placeholder="site address*" type="text" required>
-		            <span class="form-help">Your address is needed for a remote site assessment</span>
-		        </span>
+				        <span class="form-input">
+				            <label for="email">email*</label>
+				            <input name="email" placeholder="email*" type="email" required>
+				        </span>
 
-		        <span class="form-input">
-		            <label for="retailer">energy retailer</label>
-		            <input name="retailer" placeholder="energy retailer" type="text">
-		            <span class="form-help">e.g Mercury, Genesis, Contact, Meridian</span>
-		        </span>
-	        </div>
-	    </div>
-	        
-	    <h4>energy consumption</h4>
-	    <div class="padded">
-	    	<p>
-	        	To accurately size your solar system, it is essential we understand your energy usage.
-	        	<br>
-	        	<br>
-				If you have a smart meter, you can typically access your monthly energy consumption via your energy provider’s app or online portal. 
-				<br>
-				<br>
-				If this information is not available, we can provide an estimate based on your household’s appliances or <a id="autofillBtn">use  2025 montly averages for Taranaki.</a>
-	        </p>
-			<br>
-	        <div class="form-section">
-	        	<b>1. If available, include your monthly power usage in kilowatt-hour (kWh):</b>
-	        	<br>
-	        	<br>
-		        <div class="grid-container">
-		        	{% for item in solar.historical_consumption %}
-					 	<div class="item">
-			        		<span class="form-input">
-					            <label for="kwh-{{ item[0] }}">{{ item[0] }}</label>
-					            <input 
-					            	name="kwh-{{ item[0] }}" 
-					            	placeholder="{{ item[0] }}" 
-					            	type="number" 
-					            	min=0 
-					            	step=".5" 
-					            	data-autofill="{{ item[1] }}"
-					            >
-					        </span>
+				        <span class="form-input">
+				            <label for="address">site address*</label>
+				            <input name="address" placeholder="site address*" type="text" required>
+				            <span class="form-help">Your address is needed for a remote site assessment</span>
+				        </span>
+
+				        <span class="form-input">
+				            <label for="retailer">energy retailer</label>
+				            <input name="retailer" placeholder="energy retailer" type="text">
+				            <span class="form-help">e.g Mercury, Genesis, Contact, Meridian</span>
+				        </span>
+			        </div>
+                </div>
+            </li>
+
+
+            <li class="step">
+                <div class="step-marker">02</div>
+                <div class="step-content">
+                    <p class="step-title">Energy Consumption</p>
+
+                    <p>
+			        	To accurately size your solar system, it is essential we understand your energy usage.
+			        	<br>
+			        	<br>
+						If you have a smart meter, you can typically access your monthly energy consumption via your energy provider’s app or online portal. 
+						<br>
+						<br>
+						If this information is not available, we can provide an estimate based on your household’s appliances or <a id="autofillBtn">use  2025 montly averages for Taranaki.</a>
+			        </p>
+					<br>
+			        <div class="form-section">
+			        	<b>If available, include your monthly power usage in kilowatt-hour (kWh):</b>
+			        	<br>
+			        	<br>
+				        <div class="grid-container">
+				        	{% for item in solar.historical_consumption %}
+							 	<div class="item">
+					        		<span class="form-input">
+							            <label for="kwh-{{ item[0] }}">{{ item[0] }}</label>
+							            <input 
+							            	name="kwh-{{ item[0] }}" 
+							            	placeholder="{{ item[0] }}" 
+							            	type="number" 
+							            	min=0 
+							            	step=".5" 
+							            	data-autofill="{{ item[1] }}"
+							            >
+							        </span>
+					        	</div>
+							{% endfor %}
+
+				        	<small>Total: <span id="kw-total-display">0</span> kWh</small>
+				        	<input type="hidden" name="kwh-total" id="kw-total-form" value="">
+						</div>
+
+						<script type="text/javascript">
+					    	document.addEventListener('DOMContentLoaded', () => {
+
+							    const inputs = document.querySelectorAll('[data-autofill]');
+								const totalDisplay = document.getElementById('kw-total-display');
+								const totalForm = document.getElementById('kw-total-form');
+
+								function updateTotal() {
+								    let total = 0;
+
+								    inputs.forEach(input => {
+								        total += parseFloat(input.value) || 0;
+								    });
+
+								    totalDisplay.textContent = total.toFixed(2);
+								    totalForm.value = total.toFixed(2);
+								}
+
+								// Listen for changes
+								inputs.forEach(input => {
+								    input.addEventListener('input', updateTotal);
+								});
+
+								//Auto Fill
+								document.getElementById('autofillBtn').addEventListener('click', () => {
+							    	event.preventDefault(); // Stops the default form submission
+							    	inputs.forEach(input => {
+								        input.value = input.dataset.autofill;
+								    });
+								    updateTotal();
+								});
+
+								// Optional: run once on page load
+								updateTotal();
+							});
+					    </script>
+
+			        </div>
+
+		        </div>
+        	</li>
+
+        	<li class="step">
+                <div class="step-marker">03</div>
+                <div class="step-content">
+                    <p class="step-title">Where will the solar panels be mounted?</p>
+                    <div class="form-section">
+			        	<div class="form-radios">
+			        		
+							<label for="array-mounting-roof">
+								<input type="radio" name="array-mounting" id="array-mounting-roof" value="roof" checked>
+								Roof
+							</label>
+							<br>
+							<label for="array-mounting-ground">
+								<input type="radio" name="array-mounting" id="array-mounting-ground" value="ground">
+								Ground
+							</label>
+							<br>
+							<label for="array-mounting-unknown">
+								<input type="radio" name="array-mounting" id="array-mounting-unknown" value="unknown">
+								I don’t know
+							</label>
 			        	</div>
-					{% endfor %}
+			        </div>
+                </div>
+            </li>
 
-		        	<small>Total: <span id="kw-total-display">0</span> kWh</small>
-		        	<input type="hidden" name="kwh-total" id="kw-total-form" value="">
-				</div>
+            <li class="step">
+                <div class="step-marker">04</div>
+                <div class="step-content">
+                    <p class="step-title">Which inverter mode is most applicable?</p>
+                    <div class="form-section">
+			        	<div class="form-radios">
 
-				<script type="text/javascript">
-			    	document.addEventListener('DOMContentLoaded', () => {
+							<label for="inverter-mode-grid-tied">
+								<input type="radio" name="inverter-mode" id="inverter-mode-grid-tied" value="grid-tied" checked>
+								Grid-tied
+							</label>
+							<span>
+								Your solar system will stay connected to the national grid, meaning you can use grid power when needed and send excess solar power back for credit.
+							</span>
 
-					    const inputs = document.querySelectorAll('[data-autofill]');
-						const totalDisplay = document.getElementById('kw-total-display');
-						const totalForm = document.getElementById('kw-total-form');
+							<label for="inverter-mode-off-grid">
+								<input type="radio" name="inverter-mode" id="inverter-mode-off-grid" value="off-grid">
+								Off-grid
+							</label>
+							<span>
+								Your installation will operate independently, where your home relies solely on solar panels and batteries for power.
+							</span>
 
-						function updateTotal() {
-						    let total = 0;
+							<label for="inverter-mode-unknown">
+								<input type="radio" name="inverter-mode" id="inverter-mode-unknown" value="unknown">
+								I don’t know
+							</label>
+			        	</div>
+			        </div>
+			        <br>
+			        <p class="step-desc">
+                    	An inverter is a critical part of a solar system — it converts the electricity your solar panels make and turns it into the kind your home can use.
+                    </p>
+                </div>
+            </li>
 
-						    inputs.forEach(input => {
-						        total += parseFloat(input.value) || 0;
-						    });
+            <li class="step">
+                <div class="step-marker">05</div>
+                <div class="step-content">
+                    <p class="step-title">Would you like black-out prevention?</p>
+                    <div class="form-section">
+			        	<div class="form-radios">
 
-						    totalDisplay.textContent = total.toFixed(2);
-						    totalForm.value = total.toFixed(2);
-						}
+							<label for="blackout-prevention-full-backup">
+								<input type="radio" name="blackout-prevention" id="blackout-prevention-full-backup" value="full-backup">
+								Full Backup
+							</label>
+							<span>
+								All appliances and circuits will work during a grid blackout.
+							</span>
 
-						// Listen for changes
-						inputs.forEach(input => {
-						    input.addEventListener('input', updateTotal);
-						});
+							<label for="blackout-prevention-partial-backup">
+								<input type="radio" name="blackout-prevention" id="blackout-prevention-partial-backup" value="partial-backup" checked>
+								Partial Backup
+							</label>
+							<span>
+								Selected circuits & appliances will function during a grid blackout.
+							</span>
 
-						//Auto Fill
-						document.getElementById('autofillBtn').addEventListener('click', () => {
-					    	event.preventDefault(); // Stops the default form submission
-					    	inputs.forEach(input => {
-						        input.value = input.dataset.autofill;
-						    });
-						    updateTotal();
-						});
+							<label for="blackout-prevention-no">
+								<input type="radio" name="blackout-prevention" id="blackout-prevention-no" value="no">
+								No
+							</label>
+							<span>
+								You will be without power if during a grid blackout.
+							</span>
+			        	</div>
+			        </div>
+			        <br>
+			        <p class="step-desc">
+                    	Standard grid-tied solar inverters automatically shut down during a grid outage — meaning your home will lose power even if the sun is shining. 
+			        	<br>
+			        	<br>
+						At Burmark, we recommend installing solar systems with <strong>blackout protection</strong>. These systems automatically isolate from the grid during an outage and continue supplying power to your installation, ensuring greater resilience and energy security.
+                    </p>
+                </div>
+            </li>
 
-						// Optional: run once on page load
-						updateTotal();
-					});
-			    </script>
+            <li class="step">
+                <div class="step-marker">06</div>
+                <div class="step-content">
+                    <p class="step-title">Would you like batteries?</p>
+                    <div class="form-section">
+			        	<div class="form-radios">
+							<label for="ess-definitely">
+								<input type="radio" name="ess" id="ess-definitely" value="yes">
+								Definitely
+							</label>
+							<br>
+							<label for="ess-maybe">
+								<input type="radio" name="ess" id="ess-maybe" value="maybe" checked>
+								Maybe - depends on the cost
+							</label>
+							<br>
+							<label for="ess-no">
+								<input type="radio" name="ess" id="ess-no" value="no">
+								No
+							</label>
+			        	</div>
+			        </div>
+			        <br>
+			        <p class="step-desc">
+                    	Batteries store excess energy produced during the day so you can use it at night or when the sun isn’t shining. 
+			        	<br>
+			        	<br>
+			        	Batteries help reduce reliance on the grid during expensive peak hours and provide backup power during blackouts, making your home more energy independent.
+                    </p>
+                </div>
+            </li>
 
-	        </div>
-	    </div>
+            <li class="step">
+                <div class="step-marker">07</div>
+                <div class="step-content">
+                    <p class="step-title">Do you anticipate buying an electric vehicle (EV) in the foreseeable future?</p>
+                    <div class="form-section">
+			        	<div class="form-radios">
+							<label for="ev-yes">
+								<input type="radio" name="EV" id="ev-yes" value="yes">
+								Yes
+							</label>
+							<br>
+							<label for="ev-maybe">
+								<input type="radio" name="EV" id="ev-maybe" value="maybe" checked>
+								Maybe
+							</label>
+							<br>
+							<label for="ev-no">
+								<input type="radio" name="EV" id="ev-no" value="no">
+								No
+							</label>
+							<br>
+							<label for="ev-owned">
+								<input type="radio" name="EV" id="ev-owned" value="owned">
+								I already own an EV
+							</label>
+			        	</div>
+			        </div>
+                </div>
+            </li>
 
-	    <h4>array mounting</h4>
-	    <div class="padded">
-	        <div class="form-section">
-	        	<b>2. Where will the solar panels be mounted?</b>
-	        	<br>
-	        	<br>
-	        	<div class="form-radios">
-	        		
-					<label for="array-mounting-roof">
-						<input type="radio" name="array-mounting" id="array-mounting-roof" value="roof" checked>
-						Roof
-					</label>
-					<br>
-					<label for="array-mounting-ground">
-						<input type="radio" name="array-mounting" id="array-mounting-ground" value="ground">
-						Ground
-					</label>
-					<br>
-					<label for="array-mounting-unknown">
-						<input type="radio" name="array-mounting" id="array-mounting-unknown" value="unknown">
-						I don’t know
-					</label>
-	        	</div>
-	        </div>
-	    </div>
+            <li class="step">
+                <div class="step-marker">08</div>
+                <div class="step-content">
+                    <p class="step-title">That was easy!</p>
+                    <p>
+                    	Feel free to include any questions or comments in the box below, then click <b>Send</b> and we will take it from here.
+                    </p>
+                    <div class="form-section no-border">
+			        	<span class="form-input">
+				            <label for="message">message</label>
+				            <textarea placeholder="message" name="message" rows="{{form.rows}}"></textarea>
+				        </span>
 
-	    <h4>inverter mode</h4>
-	    <div class="padded">
-	    	<p>
-	        	An inverter is a critical part of a solar system — it converts the electricity your solar panels make and turns it into the kind your home can use.
-	        </p>
-	        <br>
-	    	<div class="form-section">
-	        	<b>3. Which inverter mode is most applicable?</b>
-	        	<br>
-	        	<br>
-	        	<div class="form-radios">
-
-					<label for="inverter-mode-grid-tied">
-						<input type="radio" name="inverter-mode" id="inverter-mode-grid-tied" value="grid-tied" checked>
-						Grid-tied
-					</label>
-					<span>
-						Your solar system will stay connected to the national grid, meaning you can use grid power when needed and send excess solar power back for credit.
-					</span>
-
-					<label for="inverter-mode-off-grid">
-						<input type="radio" name="inverter-mode" id="inverter-mode-off-grid" value="off-grid">
-						Off-grid
-					</label>
-					<span>
-						Your installation will operate independently, where your home relies solely on solar panels and batteries for power.
-					</span>
-
-					<label for="inverter-mode-unknown">
-						<input type="radio" name="inverter-mode" id="inverter-mode-unknown" value="unknown">
-						I don’t know
-					</label>
-	        	</div>
-	        </div>
-	    </div>
-
-	    <h4>black-out prevention</h4>
-	    <div class="padded">
-	    	<p>
-	        	Standard grid-tied solar inverters automatically shut down during a grid outage — meaning your home will lose power even if the sun is shining. 
-	        	<br>
-	        	<br>
-				At Burmark, we recommend installing solar systems with <strong>blackout protection</strong>. These systems automatically isolate from the grid during an outage and continue supplying power to your installation, ensuring greater resilience and energy security.
-	        </p>
-	        <br>
-	        <div class="form-section">
-	        	<b>4. Would you like black-out prevention?</b>
-	        	<br>
-	        	<br>
-	        	<div class="form-radios">
-
-					<label for="blackout-prevention-full-backup">
-						<input type="radio" name="blackout-prevention" id="blackout-prevention-full-backup" value="full-backup">
-						Full Backup
-					</label>
-					<span>
-						All appliances and circuits will work during a grid blackout.
-					</span>
-
-					<label for="blackout-prevention-partial-backup">
-						<input type="radio" name="blackout-prevention" id="blackout-prevention-partial-backup" value="partial-backup" checked>
-						Partial Backup
-					</label>
-					<span>
-						Selected circuits & appliances will function during a grid blackout.
-					</span>
-
-					<label for="blackout-prevention-no">
-						<input type="radio" name="blackout-prevention" id="blackout-prevention-no" value="no">
-						No
-					</label>
-					<span>
-						You will be without power if during a grid blackout.
-					</span>
-	        	</div>
-	        </div>
-	    </div>
-
-	    <h4>energy storage systems</h4>
-	    <div class="padded">
-	    	<p>
-	        	Batteries store excess energy produced during the day so you can use it at night or when the sun isn’t shining. 
-	        	<br>
-	        	<br>
-	        	Batteries help reduce reliance on the grid during expensive peak hours and provide backup power during blackouts, making your home more energy independent.
-	        </p>
-	        <br>
-	        <div class="form-section">
-	        	<b>5. Would you like batteries?</b>
-	        	<br>
-	        	<br>
-	        	<div class="form-radios">
-					<label for="ess-definitely">
-						<input type="radio" name="ess" id="ess-definitely" value="yes">
-						Definitely
-					</label>
-					<br>
-					<label for="ess-maybe">
-						<input type="radio" name="ess" id="ess-maybe" value="maybe" checked>
-						Maybe - depends on the cost
-					</label>
-					<br>
-					<label for="ess-no">
-						<input type="radio" name="ess" id="ess-no" value="no">
-						No
-					</label>
-	        	</div>
-	        </div>
-	        <br>
-	        <br>
-	        <div class="form-section">
-	        	<b>6. Do you anticipate buying an electric vehicle (EV) in the next 5 years?</b>
-	        	<br>
-	        	<br>
-	        	<div class="form-radios">
-					<label for="ev-yes">
-						<input type="radio" name="EV" id="ev-yes" value="yes">
-						Yes
-					</label>
-					<br>
-					<label for="ev-maybe">
-						<input type="radio" name="EV" id="ev-maybe" value="maybe" checked>
-						Maybe
-					</label>
-					<br>
-					<label for="ev-no">
-						<input type="radio" name="EV" id="ev-no" value="no">
-						No
-					</label>
-					<br>
-					<label for="ev-owned">
-						<input type="radio" name="EV" id="ev-owned" value="owned">
-						I already own an EV
-					</label>
-	        	</div>
-	        </div>
-	    </div>
-	        
-
-	    <h4>that was easy!</h4>
-	    <div class="padded">
-	    	<p>
-	        	Feel free to include any questions or comments in the box below, then click <b>Send</b> and we will take it from here.
-	        </p>
-	        <div class="form-section no-border">
-	        	<span class="form-input">
-		            <label for="message">message</label>
-		            <textarea placeholder="message" name="message" rows="{{form.rows}}"></textarea>
-		        </span>
-
-		        <button class="submit" type="submit" class="">{{form.submit_text}}</button>
-		        <br>
-		        <small>
-				    By clicking {{form.submit_text}}, you are agreeing to our <a href="{{ navigation.privacy-policy }}">privacy policy</a>.
-				</small>
-	        </div>
-	    </div>
+				        <button class="submit" type="submit" class="">{{form.submit_text}}</button>
+				        <br>
+				        <small>
+						    By clicking {{form.submit_text}}, you are agreeing to our <a href="{{ navigation.privacy-policy }}">privacy policy</a>.
+						</small>
+			        </div>
+                </div>
+            </li>
+        </ul>
 	</form>
+
+	{% include "js/process_list.html" %}
 
 	<script type="application/javascript">
 

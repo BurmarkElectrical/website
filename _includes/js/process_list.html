@@ -1,0 +1,60 @@
+<script type="application/javascript">
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+        const steps = document.querySelectorAll('.step');
+        const lineFill = document.getElementById('lineFill');
+        const list = document.getElementById('processList');
+
+
+        const contentContainer = document.getElementById('content-container');   
+
+        const MOBILE_BREAKPOINT = 1120;
+
+        function getScroller() {
+            return window.innerWidth < MOBILE_BREAKPOINT ? window : contentContainer;
+        }
+
+        function getTriggerY() {
+            if (window.innerWidth > MOBILE_BREAKPOINT) {
+                return contentContainer.getBoundingClientRect().top + contentContainer.clientHeight * 0.6;
+            }
+            return window.innerHeight * 0.6;
+        }
+
+        let currentScroller = getScroller();
+        currentScroller.addEventListener('scroll', onScroll, { passive: true });
+
+        window.addEventListener('resize', () => {
+            const newScroller = getScroller();
+            if (newScroller !== currentScroller) {
+                currentScroller.removeEventListener('scroll', onScroll);
+                currentScroller = newScroller;
+                currentScroller.addEventListener('scroll', onScroll, { passive: true });
+            }
+            onScroll();
+        });
+
+        function onScroll() {
+            const listRect = list.getBoundingClientRect();
+            const listTop = listRect.top;
+            const listHeight = listRect.height;
+            const triggerY = getTriggerY();
+
+            const progress = Math.min(1, Math.max(0, (triggerY - listTop) / listHeight));
+            lineFill.style.height = (progress * 100) + '%';
+
+            steps.forEach((step) => {
+                const rect = step.getBoundingClientRect();
+                /*const stepMid = rect.top + rect.height / 2;*/
+                const stepMid = rect.top;
+                if (stepMid < triggerY) {
+                    step.classList.add('active');
+                } else {
+                    step.classList.remove('active');
+                }
+            });
+        }
+    });
+    
+</script>

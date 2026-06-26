@@ -27,15 +27,50 @@
         </div>
         <nav class="menu">
           <ul>
-            <!-- <li><a href="{{ navigation.solar.index }}" class="{% if page.url == navigation.solar.index %}active{% endif %}">solar</a></li> -->
-            <li><a href="{{ navigation.autogration }}" class="{% if page.url == navigation.autogration %}active{% endif %}">auto:gration</a></li>
-            <li><a href="{{ navigation.lighting }}" class="{% if page.url == navigation.lighting %}active{% endif %}">lighting</a></li>
-            <li><a href="{{ navigation.networks }}" class="{% if page.url == navigation.networks %}active{% endif %}">networks</a></li>
-            <li><a href="{{ navigation.contact }}" class="{% if page.url == navigation.contact %}active{% endif %}">contact</a></li>
+            <li>
+              <a 
+                href="{{ navigation.solar.index }}" 
+                class="{{ page.url | urlActive: navigation.solar.index }}"
+              >
+                solar
+              </a>
+            </li>
+            <li>
+              <a 
+                href="{{ navigation.lighting }}" 
+                class="{{ page.url | urlActive: navigation.lighting }}"
+              >
+                lighting
+              </a>
+            </li>
+            <li>
+              <a 
+                href="{{ navigation.networks }}"
+                class="{{ page.url | urlActive: navigation.networks }}"
+              >
+                networks
+              </a>
+            </li>
+            <li>
+              <a 
+                href="{{ navigation.autogration }}" 
+                class="{{ page.url | urlActive: navigation.autogration }}"
+              >
+                auto:gration
+              </a>
+            </li>
+            <li>
+              <a 
+                href="{{ navigation.contact }}" 
+                class="{{ page.url | urlActive: navigation.contact }}"
+              >
+                contact
+              </a>
+            </li>
           </ul>
         </nav>
       </div>
-      <div class="half right">
+      <div id="content-container" class="half right">
         <div class="content">
           {{ content }}
         </div>

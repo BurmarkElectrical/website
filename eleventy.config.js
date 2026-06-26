@@ -6,4 +6,9 @@ export default function(eleventyConfig) {
     if (!string) return string; // Handle empty or null strings
     return string.charAt(0).toUpperCase() + string.slice(1);
   });
+
+  eleventyConfig.addLiquidFilter("urlActive", function(pageUrl, prefix) {
+    if (!pageUrl || !prefix) return "";
+    return pageUrl.startsWith(prefix) ? "active" : "";
+  });
 };
