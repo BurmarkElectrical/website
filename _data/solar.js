@@ -19,10 +19,9 @@ module.exports = {
 
 	'faq': {
 		'grid-battery': {
-			'title': '',
-			'source': '',
-			'import': '26',
-			'export': '8'
+			'source': 'Genesis 2026',
+			'import': '35',
+			'export': '12'
 		}
 	}
 }
