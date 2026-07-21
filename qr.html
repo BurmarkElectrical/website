@@ -4,17 +4,74 @@ sitemapIgnore: true
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="refresh" content="0; url={{ data.url }}">
- 
-  <script>
-    window.location.href = "{{ data.url }}"
-  </script>
-   
-  <title>QR Code Redirection</title>
+    <meta charset="UTF-8" />
+    <title>QR Code Redirection</title>
+
+    <!-- 
+
+    Its important that the URL contains the trailing backslash /
+
+    e.g https://burmarkelectrical.nz/qr/?r=/solar/
+
+    ?r=https://burmarkelectrical.nz/solar/
+    ?r=/solar/
+    ?r=solar/ 
+    ?r=solar
+
+    -->
+
+    <script>
+        (() => {
+            const defaultUrl = "{{ data.url }}";
+
+            // Trusted domains (all subdomains are automatically allowed)
+            const trustedDomains = [
+                new URL("{{ data.url }}").hostname //remove https://
+                // "example.com",
+            ];
+
+            let destination = defaultUrl;
+
+            const redirect = new URLSearchParams(window.location.search).get("r");
+
+            if (redirect) {
+                try {
+                    const url = new URL(redirect, window.location.origin);
+
+                    // Allow relative URLs on this site
+                    if (url.origin === window.location.origin) {
+                        destination = url.pathname + url.search + url.hash;
+                    } else {
+                        // Allow trusted domains and all their subdomains
+                        const isTrusted = trustedDomains.some(domain =>
+                            url.hostname === domain ||
+                            url.hostname.endsWith(`.${domain}`)
+                            );
+
+                        if (isTrusted) {
+                            destination = url.href;
+                        }
+                    }
+                } catch {
+            // Invalid URL - fall back to default
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById("redirectLink").href = destination;
+        });
+
+        //console.log(destination)
+
+        //Redirect
+        window.location.replace(destination);
+    })();
+</script>
 </head>
 <body>
-  <!-- Currently just redirecting to home page if coming here from a QR code scan -->
-  If you are not redirected automatically, follow <a href='{{ data.url }}'>Burmark Electrical</a>
+    <p>
+        If you are not redirected automatically,
+        <a id="redirectLink" href="{{ data.url }}">click here</a>.
+    </p>
 </body>
 </html>
