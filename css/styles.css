@@ -385,6 +385,13 @@ ol ol li {
   border-left: 2px solid #c0a496;
 }
 
+.tag-text {
+  font-size: 1.1em;
+  font-weight: 400;
+  color: #c0a496;
+  display: block;
+}
+
 .inset {
   padding-left: 3rem;
 }
