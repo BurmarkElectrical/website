@@ -526,6 +526,17 @@ ol ol li {
    Forms
 ======================================*/
 
+/*Honeypot*/
+input[name="last_name"] {
+    position: absolute;
+    left: -999999999px;
+}
+
+input[name="_honey"] {
+    position: absolute;
+    left: -999999999px;
+}
+
 .form {
   overflow: auto; /*clear floats*/
   margin-bottom: 2rem;
