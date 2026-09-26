@@ -526,13 +526,8 @@ ol ol li {
    Forms
 ======================================*/
 
-/*Honeypot*/
+/*HP*/
 input[name="last_name"] {
-    position: absolute;
-    left: -999999999px;
-}
-
-input[name="_honey"] {
     position: absolute;
     left: -999999999px;
 }

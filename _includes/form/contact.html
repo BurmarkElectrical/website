@@ -1,4 +1,4 @@
-<form action="{{ form.action }}{{ form.action_hash }}" class="form" method="POST">
+<form action="{{ form.action }}{{ form.action_hash }}" class="form contact_form" method="POST">
 
     {% include "form/hidden_inputs.html" %}
     
@@ -21,3 +21,10 @@
     <button class="submit" type="submit">{{form.submit_text}}</button>
 
 </form>
+
+<script>
+  document.querySelector('.contact_form').addEventListener('submit', function () {
+    var hp = document.querySelector('.contact_form input[name="last_name"]');
+    if (hp) hp.name = '_honey';
+  });
+</script>
